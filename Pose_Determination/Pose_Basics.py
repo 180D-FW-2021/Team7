@@ -24,6 +24,17 @@ def controlVolume():
     openRing = False
     openPinky = False
     coordinateValues = np.zeros(21)
+
+    #display window to bring camera to front
+    cv2.namedWindow("GetFocus", cv2.WINDOW_NORMAL)
+    pic = np.zeros(10000)
+    cv2.imshow("GetFocus", pic)
+    cv2.setWindowProperty("GetFocus", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+    cv2.waitKey(1)
+    cv2.setWindowProperty("GetFocus", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_NORMAL)
+    cv2.destroyWindow("GetFocus")
+
+
     while notQuit:
         success, img = cap.read()
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -78,6 +89,6 @@ def controlVolume():
                     #(255, 0, 255), 3)
         cv2.putText(img, text, (10, 70), cv2.FONT_HERSHEY_PLAIN, 3,
                     (255, 0, 255), 3)
-    
+
         cv2.imshow("Image", img)
         cv2.waitKey(1)
