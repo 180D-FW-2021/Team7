@@ -1,0 +1,16 @@
+#banner {
+    background-color: dodgerblue;
+    height: 200px;
+    text-align: center;
+}
+h1 {
+    margin: 0px;
+    line-height: 200px;
+}
+body {
+    margin: 0px;
+    background-color: lightsteelblue;
+}
+.bodyText {
+    color: #5b120c;
+}
