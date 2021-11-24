@@ -21,9 +21,12 @@ def on_disconnect(client, userdata, rc):
 # (you can create separate callbacks per subscribed topic)
 def on_message(client, userdata, message):
   print('Received message: ' + str(message.payload.decode("utf-8")) + ' on topic ' + message.topic + ' with QoS ' + str(message.qos))
-  if str(message.payload.decode("utf-8")) == "Run CLIclick":
+  if str(message.payload.decode("utf-8")) == "Run CLIclick Zoom In":
     print("Message detected, command will be performed")
-    os.system("cliclick c:0,0")
+    os.system("cliclick -m verbose kd:cmd kp:num-plus ku:cmd")
+  elif str(message.payload.decode("utf-8")) == "Run CLIclick Zoom Out":
+    print("Message detected, command will be performed")
+    os.system("cliclick -m verbose kd:cmd kp:num-minus ku:cmd")
 
 # 1. create a client instance.
 client = mqtt.Client()
