@@ -1,5 +1,14 @@
 import paho.mqtt.client as mqtt
-# import numpy as np
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument("-i", "--ZoomIn", help="Zoom In", action="store_true")
+parser.add_argument("-o", "--ZoomOut", help="Zoom Out", action="store_true")
+args = parser.parse_args()
+
+if (not args.ZoomIn) and (not args.ZoomOut):
+  print("Zooming direction not specified")
+  exit()
 
 # 0. define callbacks - functions that run when events happen.
 # The callback for when the client receives a CONNACK response from the server.
@@ -21,6 +30,8 @@ def on_disconnect(client, userdata, rc):
 def on_message(client, userdata, message):
   print('Received message: ' + str(message.payload) + ' on topic ' + message.topic + ' with QoS ' + str(message.qos))
 
+#To Do add arguments to input:
+
 # 1. create a client instance.
 client = mqtt.Client()
 # add additional client options (security, certifications, etc.)
@@ -39,7 +50,12 @@ client.loop_start()
 # 4. use subscribe() to subscribe to a topic and receive messages.
 # 5. use publish() to publish messages to the broker.
 # payload must be a string, bytearray, int, float or None.
-client.publish('ece180d/team7', "Run CLIclick", qos=1)
+
+#To Do: Include zoom in vs zoom out in message
+if args.ZoomIn:
+  client.publish('ece180d/team7', "Run CLIclick Zoom In", qos=1)
+elif args.ZoomOut:
+  client.publish('ece180d/team7', "Run CLIclick Zoom Out", qos=1)
 # 6. use disconnect() to disconnect from the broker.
 client.loop_stop()
 client.disconnect()
