@@ -51,10 +51,11 @@ client.loop_start()
 # 5. use publish() to publish messages to the broker.
 # payload must be a string, bytearray, int, float or None.
 
-#To Do: Include zoom in vs zoom out in message
 if args.ZoomIn:
+  print("Publishing Zoom In")
   client.publish('ece180d/team7', "Run CLIclick Zoom In", qos=1)
 elif args.ZoomOut:
+  print("Publishing Zoom Out")
   client.publish('ece180d/team7', "Run CLIclick Zoom Out", qos=1)
 # 6. use disconnect() to disconnect from the broker.
 client.loop_stop()
