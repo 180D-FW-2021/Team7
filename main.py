@@ -4,7 +4,8 @@ import sys
 import webbrowser
 from multiprocessing import Process
 from Pose_Determination.Pose_Basics import controlVolume
-from MQTT.button_control import button_MQTT, zoom_in, zoom_out
+#from MQTT.button_control import button_MQTT, zoom_in, zoom_out
+from SpeechRec.audio import run_speec_rec
 
 #Function below used to test parallel function behavior
 def parallel_test():
@@ -18,9 +19,11 @@ def main():
     filename = "Visualization/index.html"
     webbrowser.open('file://' + os.path.realpath(filename))
 
+    run_speec_rec()
     #if voice command to turn up volume?
-    controlVolume()
+    #controlVolume()
     
+    """""
     #Zoom in/out buttons
     #This is the general format for calling all our functions at the same time
     p1 = Process(target=button_MQTT)
@@ -29,6 +32,7 @@ def main():
     p2.start()
     p1.join()
     p2.join()
+    """""
 
 if __name__ == "__main__":
     main()

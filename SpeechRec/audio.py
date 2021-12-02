@@ -9,6 +9,8 @@ from google.cloud import speech
 import pyaudio
 from six.moves import queue
 
+from Pose_Determination.Pose_Basics import controlVolume
+
 # Audio recording parameters
 RATE = 16000
 CHUNK = int(RATE / 10)  # 100ms
@@ -157,12 +159,15 @@ def listen_print_loop(responses):
                 os.system("cliclick ku:cmd")
                 print(transcript)
                 os.system("cliclick t:transcript")
+
+            if re.search(r"\b(control volume)\b", transcript, re.I):
+                controlVolume()
            
 
             num_chars_printed = 0
 
 
-def main():
+def run_speec_rec():
     # See http://g.co/cloud/speech/docs/languages
     # for a list of supported languages.
     language_code = "en-US"  # a BCP-47 language tag
@@ -189,7 +194,3 @@ def main():
 
         # Now, put the transcription responses to use.
         listen_print_loop(responses)
-
-
-if __name__ == "__main__":
-    main()
