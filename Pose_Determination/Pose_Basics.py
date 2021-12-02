@@ -8,7 +8,7 @@ import numpy as np
  
 def controlVolume():
     cap = cv2.VideoCapture(0)
-    
+    cv2.startWindowThread()
     mpHands = mp.solutions.hands
     hands = mpHands.Hands()
     mpDraw = mp.solutions.drawing_utils
@@ -92,3 +92,7 @@ def controlVolume():
 
         cv2.imshow("Image", img)
         cv2.waitKey(1)
+    
+    cv2.waitKey(1)
+    cv2.destroyAllWindows()
+    cv2.waitKey(1)
