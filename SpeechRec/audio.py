@@ -3,6 +3,8 @@ from __future__ import division
 import re
 import sys
 import os
+import webbrowser
+import time
 
 from google.cloud import speech
 
@@ -162,6 +164,25 @@ def listen_print_loop(responses):
 
             if re.search(r"\b(control volume)\b", transcript, re.I):
                 controlVolume()
+            
+            if re.search(r"\b(launch Google)\b", transcript, re.I):
+                print("Opening Google..")
+                webbrowser.open("https://www.google.com")
+                print("Wait")
+                time.sleep(0.5)
+            if re.search(r"\b(search dog videos)\b", transcript, re.I):
+                os.system("cliclick t:'dog videos'")
+                time.sleep(0.5)
+                os.system("cliclick kp:enter")
+                print("Searched")
+            if re.search(r"\b(click)\b", transcript, re.I):
+                os.system("cliclick c:.")
+            if re.search(r"\b(enter)\b", transcript, re.I):
+                os.system("cliclick kp:enter")
+            if re.search(r"\b(go back)\b", transcript, re.I):
+                os.system("cliclick kd:ctrl,shift kp:tab ku:ctrl,shift")
+                #os.system("cliclick kp:tab")
+                #os.system("cliclick ku:ctrl,shift")
            
 
             num_chars_printed = 0
