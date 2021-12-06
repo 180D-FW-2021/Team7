@@ -5,7 +5,7 @@ like Google, Gmail, Facebook, and possibly more. There is also a pop-up window w
 are avaialble, and how to do voluem control with pose recognition. 
 
 
-This code was written in HTML and CSS. There are no prerequisites for running this file. 
+This code was written in HTML and CSS. There are no prerequisites for running this file. Clicking on 'index.html' will lanch the main website and the popup individually.
 
 The pop up was designed on Elfsight, a website that helps create widgets for HTML. This popup is included with a div class and script source that is found online. 
 
