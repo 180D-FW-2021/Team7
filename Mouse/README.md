@@ -1,0 +1,7 @@
+TEAM 7/ Mouse
+
+This source code is a Arduino file (.ino). This uses the Arduino 33 BLE Nano Sense and the accelerometer sensor. We decided to go with this instead of the RaspberryPi and BerryIMU because in order to have an accurate mouse the BerryIMU and MQTT connection was too slow. 
+
+The source code uses the IMU.readacceleration function to get the values in meters per second squared. Then the code uses a threshold value for determining which direction we are moving the mouse in. I chose the 0.3 threshold because that prevented the most false/small movements. Values below 0.3 tended to be too easily influenced or changed the mouse based on the tiniest movements. Values above created too much lag time. Based on the ax and ay values I used the USBMouse library on the arduino and the .move function to move the mousee based on the values found by the accelerometer. 
+
+There are a few bugs specifically with the diagonal movements. The four directions, right, left, up and down work pretty accurately, however the diagonal detection is still not perfect it causes the mouse to move very fast. Next quarter I want to improve on that and make it more accurate. Additionally, I want to add a click button that could help with scrolling and selecting features on the laptop display. 
