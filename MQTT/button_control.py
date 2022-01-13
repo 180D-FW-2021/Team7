@@ -5,11 +5,13 @@ import os
 #Specified full path with assumption that files will remain in MQTT folder
 def zoom_in():
 	print("zoomIn_button was pressed. Running RPi_publisher.py")
-	os.system("python3 /home/pi/Team7/MQTT/RPi_publisher.py -i")
+	#os.system("python3 /home/pi/Team7/MQTT/RPi_publisher.py -i")
+	os.system("/home/pi/Team7/MQTT/RPi_publisher.py -i")
 
 def zoom_out():
         print("zoomOut_button was pressed. Running RPi_publisher.py")
-        os.system("python3 /home/pi/Team7/MQTT/RPi_publisher.py -o")
+        #os.system("python3 /home/pi/Team7/MQTT/RPi_publisher.py -o")
+        os.system("/home/pi/Team7/MQTT/RPi_publisher.py -o")
 
 def button_MQTT():
 	zoomIn_button = Button(22) 
@@ -26,4 +28,4 @@ def button_MQTT():
 		#exec(open("RPi_publisher.py").read())
 	print("Done.")
 
-#button_MQTT()
+button_MQTT()

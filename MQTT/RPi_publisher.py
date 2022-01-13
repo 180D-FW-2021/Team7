@@ -1,5 +1,8 @@
+#!/usr/bin/python3
+from gpiozero import Button
 import paho.mqtt.client as mqtt
 import argparse
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--ZoomIn", help="Zoom In", action="store_true")
@@ -42,21 +45,43 @@ client.on_disconnect = on_disconnect
 client.on_message = on_message
 
 # 2. connect to a broker using one of the connect*() functions.
-client.connect_async('mqtt.eclipseprojects.io')
+#client.connect_async('mqtt.eclipseprojects.io')
+#client.connect_async("mqtt.eclipse.org")
+client.connect_async("test.mosquitto.org")
 
 # 3. call one of the loop*() functions to maintain network traffic flow with the broker.
 client.loop_start()
+
+#------BUTTON PRESS----------
+def zoom_in_publish():
+  print("zoomIn button pressed. Publishing now.")
+  client.publish('ece180d/team7', "Run CLIclick Zoom In", qos=1)
+
+def zoom_out_publish():
+  print("zoomOut button pressed. Publishing now.")
+  client.publish('ece180d/team7', "Run CLIclick Zoom Out", qos=1)
+
+zoomIn_button = Button(22)
+zoomOut_button = Button(23)
+print("Waiting for buttons")
+
+try:
+  while True:
+    zoomIn_button.when_pressed = zoom_in_publish
+    zoomOut_button.when_pressed = zoom_out_publish
 
 # 4. use subscribe() to subscribe to a topic and receive messages.
 # 5. use publish() to publish messages to the broker.
 # payload must be a string, bytearray, int, float or None.
 
-if args.ZoomIn:
-  print("Publishing Zoom In")
-  client.publish('ece180d/team7', "Run CLIclick Zoom In", qos=1)
-elif args.ZoomOut:
-  print("Publishing Zoom Out")
-  client.publish('ece180d/team7', "Run CLIclick Zoom Out", qos=1)
+#if args.ZoomIn:
+#  print("Publishing Zoom In")
+#  client.publish('ece180d/team7', "Run CLIclick Zoom In", qos=1)
+#elif args.ZoomOut:
+#  print("Publishing Zoom Out")
+#  client.publish('ece180d/team7', "Run CLIclick Zoom Out", qos=1)
+
 # 6. use disconnect() to disconnect from the broker.
-client.loop_stop()
-client.disconnect()
+except KeyboardInterrupt:
+  client.loop_stop()
+  client.disconnect()
