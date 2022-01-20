@@ -20,7 +20,7 @@ Visualization
 
 START UP:
 1. Launch PC_subscriber script for MQTT: "python3 PC_subscriber.py"
-2. Connect Rasperry Pi and launch button_control script on RPi terminal: "./button_control.py"
+2. Connect Rasperry Pi and launch button_control script on RPi terminal: "./RPi_publisher.py"
 3. Connect Arduino to power
 4. Run main script on laptop to launch visualization, pose determination, and speech recognition
 
