@@ -16,10 +16,11 @@ Files:
   - CLIclick:
     - Emulate mouse and keyboard events such as cmd, + keys (which we use to Zoom in)
 2. RPi_publisher.py:
-  - Run from button_control.py
+  - Run with ./RPi_publisher.py
   - This is the publisher script developed from Lab 3
-  - Once a button is pressed, this script is run to send the message to the client (laptop)
-3. button_control.py:
+  - Once a button is pressed, this script publishes the corresponding message to the client (laptop)
+  - Uses GPIOzero
+3. button_control.py: [NO LONGER USED]
   - SETUP: Run with "./button_control.py"
   - Waits for button press and runs publisher script accordingly
   - Uses GPIPOzero
