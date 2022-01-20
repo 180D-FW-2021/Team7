@@ -4,14 +4,14 @@ import paho.mqtt.client as mqtt
 import argparse
 import os
 
-parser = argparse.ArgumentParser()
-parser.add_argument("-i", "--ZoomIn", help="Zoom In", action="store_true")
-parser.add_argument("-o", "--ZoomOut", help="Zoom Out", action="store_true")
-args = parser.parse_args()
+#parser = argparse.ArgumentParser()
+#parser.add_argument("-i", "--ZoomIn", help="Zoom In", action="store_true")
+#parser.add_argument("-o", "--ZoomOut", help="Zoom Out", action="store_true")
+#args = parser.parse_args()
 
-if (not args.ZoomIn) and (not args.ZoomOut):
-  print("Zooming direction not specified")
-  exit()
+#if (not args.ZoomIn) and (not args.ZoomOut):
+#  print("Zooming direction not specified")
+#  exit()
 
 # 0. define callbacks - functions that run when events happen.
 # The callback for when the client receives a CONNACK response from the server.
@@ -53,6 +53,10 @@ client.connect_async("test.mosquitto.org")
 client.loop_start()
 
 #------BUTTON PRESS----------
+def mouse_click_publish():
+  print("click button pressed. Publishing now.")
+  client.publish('ece180d/team7', "Run CLIclick Mouse Click", qos=1)
+
 def zoom_in_publish():
   print("zoomIn button pressed. Publishing now.")
   client.publish('ece180d/team7', "Run CLIclick Zoom In", qos=1)
@@ -61,6 +65,7 @@ def zoom_out_publish():
   print("zoomOut button pressed. Publishing now.")
   client.publish('ece180d/team7', "Run CLIclick Zoom Out", qos=1)
 
+click_button = Button(5)
 zoomIn_button = Button(22)
 zoomOut_button = Button(23)
 print("Waiting for buttons")
@@ -69,7 +74,8 @@ try:
   while True:
     zoomIn_button.when_pressed = zoom_in_publish
     zoomOut_button.when_pressed = zoom_out_publish
-
+    click_button.when_pressed = mouse_click_publish
+ 
 # 4. use subscribe() to subscribe to a topic and receive messages.
 # 5. use publish() to publish messages to the broker.
 # payload must be a string, bytearray, int, float or None.
