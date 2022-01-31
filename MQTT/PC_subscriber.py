@@ -27,6 +27,9 @@ def on_message(client, userdata, message):
   elif str(message.payload.decode("utf-8")) == "Run CLIclick Zoom Out":
     print("Message detected, command will be performed")
     os.system("cliclick -m verbose kd:cmd kp:num-minus ku:cmd")
+  elif str(message.payload.decode("utf-8")) == "Run CLIclick Mouse Click":
+    print("Message detected, command will be performed")
+    os.system("cliclick c:+0,+0")
 
 # 1. create a client instance.
 client = mqtt.Client()
@@ -39,9 +42,9 @@ client.on_message = on_message
 
 
 # 2. connect to a broker using one of the connect*() functions.
-client.connect_async('mqtt.eclipseprojects.io')
+#client.connect_async('mqtt.eclipseprojects.io')
 # client.connect("mqtt.eclipse.org")
-
+client.connect_async("test.mosquitto.org")
 
 # 3. call one of the loop*() functions to maintain network traffic flow with the broker.
 client.loop_start()
