@@ -159,8 +159,9 @@ def listen_print_loop(responses):
                 os.system("cliclick kd:cmd")
                 os.system("cliclick kp:space")
                 os.system("cliclick ku:cmd")
-                print(transcript)
-                os.system("cliclick t:transcript")
+                test_transcript = "'" + transcript[5:] +"'"
+                print(test_transcript)
+                os.system("cliclick t:" + test_transcript)
 
             if re.search(r"\b(control volume)\b", transcript, re.I):
                 controlVolume()
@@ -170,8 +171,10 @@ def listen_print_loop(responses):
                 webbrowser.open("https://www.google.com")
                 print("Wait")
                 time.sleep(0.5)
-            if re.search(r"\b(search dog videos)\b", transcript, re.I):
-                os.system("cliclick t:'dog videos'")
+            if re.search(r"\b(search)\b", transcript, re.I):
+                test_transcript = "'" + transcript[7:] +"'"
+                print(test_transcript)
+                os.system("cliclick t:" + test_transcript)
                 time.sleep(0.5)
                 os.system("cliclick kp:enter")
                 print("Searched")
@@ -183,6 +186,23 @@ def listen_print_loop(responses):
                 os.system("cliclick kd:ctrl,shift kp:tab ku:ctrl,shift")
                 #os.system("cliclick kp:tab")
                 #os.system("cliclick ku:ctrl,shift")
+            if re.search(r"\b(compose)\b", transcript, re.I):
+                os.system("cliclick t:'c'")
+            if re.search(r"\b(send email)\b", transcript, re.I):
+                            os.system("cliclick kd:ctrl kp:enter ku:ctrl")
+            if re.search(r"\b(delete email)\b", transcript, re.I):
+                            os.system("cliclick t:'#'")
+            if re.search(r"\b(reply)\b", transcript, re.I):
+                            os.system("cliclick t:'r'")        
+            if re.search(r"\b(launch Gmail)\b", transcript, re.I):
+                            print("Opening Gmail..")
+                            webbrowser.open("https://www.gmail.com")
+                            print("Wait")
+                            time.sleep(0.5)
+            if re.search(r"\b(type)\b", transcript, re.I):
+                test_transcript = "'" + transcript[5:] +"'"
+                print(test_transcript)
+                os.system("cliclick t:" + test_transcript)
            
 
             num_chars_printed = 0
@@ -192,6 +212,7 @@ def run_speec_rec():
     # See http://g.co/cloud/speech/docs/languages
     # for a list of supported languages.
     language_code = "en-US"  # a BCP-47 language tag
+    print("made it to audio.py")
 
     client = speech.SpeechClient()
     config = speech.RecognitionConfig(
@@ -215,3 +236,6 @@ def run_speec_rec():
 
         # Now, put the transcription responses to use.
         listen_print_loop(responses)
+        
+if __name__ == "__main__":
+    run_speec_rec()
