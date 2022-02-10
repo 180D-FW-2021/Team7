@@ -178,8 +178,8 @@ def listen_print_loop(responses):
                 time.sleep(0.5)
                 os.system("cliclick kp:enter")
                 print("Searched")
-            if re.search(r"\b(click)\b", transcript, re.I):
-                os.system("cliclick c:.")
+            #if re.search(r"\b(click)\b", transcript, re.I):
+             #   os.system("cliclick c:.")
             if re.search(r"\b(enter)\b", transcript, re.I):
                 os.system("cliclick kp:enter")
             if re.search(r"\b(go back)\b", transcript, re.I):
@@ -189,7 +189,7 @@ def listen_print_loop(responses):
             if re.search(r"\b(compose)\b", transcript, re.I):
                 os.system("cliclick t:'c'")
             if re.search(r"\b(send email)\b", transcript, re.I):
-                            os.system("cliclick kd:ctrl kp:enter ku:ctrl")
+                            os.system("cliclick kd:cmd kp:enter ku:cmd")
             if re.search(r"\b(delete email)\b", transcript, re.I):
                             os.system("cliclick t:'#'")
             if re.search(r"\b(reply)\b", transcript, re.I):
@@ -203,6 +203,8 @@ def listen_print_loop(responses):
                 test_transcript = "'" + transcript[5:] +"'"
                 print(test_transcript)
                 os.system("cliclick t:" + test_transcript)
+            if re.search(r"\b(next)\b", transcript, re.I):
+                os.system("cliclick kp:tab")
            
 
             num_chars_printed = 0

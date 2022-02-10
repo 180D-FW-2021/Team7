@@ -7,12 +7,6 @@ from Pose_Determination.Pose_Basics import controlVolume
 #from MQTT.button_control import button_MQTT, zoom_in, zoom_out
 from SpeechRec.audio import run_speec_rec
 
-#Function below used to test parallel function behavior
-def parallel_test():
-    for i in range(100):
-        if i is 75:
-            print("75")
-
 def main():
 
     #button press to open this 
