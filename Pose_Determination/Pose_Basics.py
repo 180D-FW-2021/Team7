@@ -27,7 +27,7 @@ def controlVolume():
 
     #display window to bring camera to front
     cv2.namedWindow("GetFocus", cv2.WINDOW_NORMAL)
-    pic = np.zeros(10000)
+    pic = np.zeros(500)
     cv2.imshow("GetFocus", pic)
     cv2.setWindowProperty("GetFocus", cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
     cv2.waitKey(1)

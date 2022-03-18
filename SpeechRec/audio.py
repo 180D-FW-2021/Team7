@@ -5,8 +5,10 @@ import sys
 import os
 import webbrowser
 import time
+import tkinter as tk
 
 from google.cloud import speech
+from SpeechRec.pop_up import make_popup_block
 
 import pyaudio
 from six.moves import queue
@@ -170,6 +172,13 @@ def listen_print_loop(responses):
                 print("Opening Google..")
                 webbrowser.open("https://www.google.com")
                 print("Wait")
+                make_popup_block('Launch Google')
+                time.sleep(0.5)
+            if re.search(r"\b(launch Facebook)\b", transcript, re.I):
+                print("Opening Google..")
+                webbrowser.open("https://www.facebook.com")
+                print("Wait")
+                make_popup_block('Launch Facebook')
                 time.sleep(0.5)
             if re.search(r"\b(search)\b", transcript, re.I):
                 test_transcript = "'" + transcript[7:] +"'"
@@ -178,27 +187,24 @@ def listen_print_loop(responses):
                 time.sleep(0.5)
                 os.system("cliclick kp:enter")
                 print("Searched")
-            #if re.search(r"\b(click)\b", transcript, re.I):
-             #   os.system("cliclick c:.")
             if re.search(r"\b(enter)\b", transcript, re.I):
                 os.system("cliclick kp:enter")
             if re.search(r"\b(go back)\b", transcript, re.I):
                 os.system("cliclick kd:ctrl,shift kp:tab ku:ctrl,shift")
-                #os.system("cliclick kp:tab")
-                #os.system("cliclick ku:ctrl,shift")
             if re.search(r"\b(compose)\b", transcript, re.I):
                 os.system("cliclick t:'c'")
             if re.search(r"\b(send email)\b", transcript, re.I):
-                            os.system("cliclick kd:cmd kp:enter ku:cmd")
+                os.system("cliclick kd:cmd kp:enter ku:cmd")
             if re.search(r"\b(delete email)\b", transcript, re.I):
-                            os.system("cliclick t:'#'")
+                os.system("cliclick t:'#'")
             if re.search(r"\b(reply)\b", transcript, re.I):
-                            os.system("cliclick t:'r'")        
+                os.system("cliclick t:'r'")        
             if re.search(r"\b(launch Gmail)\b", transcript, re.I):
-                            print("Opening Gmail..")
-                            webbrowser.open("https://www.gmail.com")
-                            print("Wait")
-                            time.sleep(0.5)
+                print("Opening Gmail..")
+                webbrowser.open("https://www.gmail.com")
+                print("Wait")
+                make_popup_block('Launch Gmail')
+                time.sleep(0.5)
             if re.search(r"\b(type)\b", transcript, re.I):
                 test_transcript = "'" + transcript[5:] +"'"
                 print(test_transcript)
